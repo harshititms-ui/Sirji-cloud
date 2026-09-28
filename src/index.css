@@ -1,0 +1,461 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #8b5cf6;
+  --secondary-dark: #7c3aed;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Sparkle Button */
+.sp {
+  position: relative;
+}
+
+.sparkle-button {
+  min-width: 200px;
+  height: 50px;
+  padding: 0 20px;
+  background: transparent;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  position: relative;
+  transition-duration: .2s;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sparkle-button:hover {
+  transform: scale(1.02);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sparkle-button:active {
+  transform: scale(0.98);
+}
+
+.sparkle-button .spark {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  rotate: 0deg;
+  overflow: hidden;
+  mask: linear-gradient(white, transparent);
+  animation: flip calc(var(--spark) * 2) infinite steps(2, end);
+}
+
+@keyframes flip {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.sparkle-button .spark:before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  translate: -50% -50%;
+  rotate: 0;
+  transform: rotate(-90deg);
+  opacity: 1;
+  background: conic-gradient(from 0deg, transparent 0 340deg, white 360deg);
+  transition: opacity var(--spark);
+  animation: rotate var(--spark) linear infinite both;
+}
+
+.sparkle-button .backdrop {
+  position: absolute;
+  inset: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.sparkle-button .text {
+  z-index: 1;
+  color: white;
+  font-weight: 500;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+.sparkle-button:is(:hover, :focus-visible) .spark:before {
+  animation: none;
+  opacity: 0;
+  transition-duration: 0.3s;
+}
+
+.particle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  transition: transform var(--lifetime, 1000ms) ease-out;
+  pointer-events: none;
+  animation: fade var(--lifetime, 1000ms) ease-in forwards;
+}
+
+.particle:nth-child(even) {
+  transform: translate(var(--x, 0), var(--y, 0)) rotate(90deg);
+}
+
+.particle:nth-child(odd) {
+  transform: translate(var(--x, 0), var(--y, 0)) rotate(-90deg);
+}
+
+@keyframes fade {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Button 1 - Join Today Button */
+.button {
+  position: relative;
+}
+
+.button .bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.button:hover .bg {
+  opacity: 0.1;
+}
+
+.button .splash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.button:hover .splash {
+  opacity: 0.1;
+}
+
+.button .outline {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  z-index: -1;
+}
+
+/* Button 2 - Animated Button */
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 12px 16px;
+  gap: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.animated-button:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.animated-button .circle {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  right: -10px;
+  top: -10px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: -1;
+}
+
+.animated-button:hover .circle {
+  transform: scale(10);
+  opacity: 0.2;
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+}
+
+.animated-button .arr-1 {
+  display: block;
+  position: relative;
+  color: white;
+  transition: 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  opacity: 0;
+  width: 0;
+}
+
+.animated-button:hover .arr-1 {
+  opacity: 1;
+  width: 20px;
+}
+
+.animated-button .arr-2 {
+  display: block;
+  position: relative;
+  transition: 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  opacity: 1;
+  width: 20px;
+}
+
+.animated-button:hover .arr-2 {
+  opacity: 0;
+  width: 0;
+}
+
+/* Button 3 - Space Button */
+.btn {
+  position: relative;
+  padding: 12px 24px;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid #5041C0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.btn strong {
+  z-index: 2;
+  position: relative;
+  font-weight: 600;
+}
+
+#container-stars {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: 0.5s;
+  backdrop-filter: blur(1rem);
+  border-radius: 8px;
+}
+
+#stars {
+  position: relative;
+  background: transparent;
+  width: 200rem;
+  height: 200rem;
+}
+
+#stars::after {
+  content: "";
+  position: absolute;
+  top: -10rem;
+  left: -100rem;
+  width: 100%;
+  height: 100%;
+  animation: animStarRotate 90s linear infinite;
+}
+
+#stars::after {
+  background-image: radial-gradient(#ffffff 1px, transparent 1%);
+  background-size: 50px 50px;
+}
+
+#stars::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 170%;
+  height: 500%;
+  animation: animStar 60s linear infinite;
+}
+
+#stars::before {
+  background-image: radial-gradient(#ffffff 1px, transparent 1%);
+  background-size: 50px 50px;
+  opacity: 0.5;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-135rem);
+  }
+}
+
+@keyframes animStarRotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+
+#glow {
+  position: absolute;
+  display: flex;
+  width: 12rem;
+}
+
+.circle {
+  width: 100%;
+  height: 30px;
+  filter: blur(2rem);
+  animation: pulse 4s infinite;
+  z-index: -1;
+}
+
+.circle:nth-of-type(1) {
+  background: rgba(254, 83, 186, 0.636);
+}
+
+.circle:nth-of-type(2) {
+  background: rgba(142, 81, 234, 0.704);
+}
+
+.btn:hover #container-stars {
+  z-index: 1;
+  background-color: #212121;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Button 4 - Send Message Button */
+.state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.state--default p {
+  display: flex;
+  gap: 3px;
+  font-weight: 600;
+}
+
+.state--sent p {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  font-weight: 600;
+}
+
+.state--sent p span {
+  opacity: 0;
+  animation: sentText 2s forwards;
+}
+
+@keyframes sentText {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* SMTP.js form */
+#contactForm .field {
+  margin-bottom: 20px;
+}
+
+#contactForm label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#contactForm textarea {
+  min-height: 120px;
+}
+
+#contactForm .btn-submit {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#contactForm .btn-submit:hover {
+  background-color: var(--primary-dark);
+}
